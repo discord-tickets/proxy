@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://static.eartharoid.me/discord-tickets/logo/favicon.ico" rel="icon">
+	<link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="dark bg-gray-900 text-gray-200 m-4 lg:m-12">
+	<div class="max-w-xl mx-auto lg:mt-40 bg-gray-800 p-4 lg:p-8 rounded-xl shadow-lg text-center">
+		<div class="grid grid-cols-1 gap-6">
+			<div>
+				<img src="https://static.eartharoid.me/discord-tickets/logo/wordmark/gradient.png" alt="Discord Tickets"
+					class="p-4" />
+				<h1 class="text-3xl font-semibold my-2">
+					Proxy service
+				</h1>
+			</div>
+			<p class="font-medium">
+				Enter the IP address (and port if not 80) of your Discord Tickets bot to generate a proxied URL.
+				Traffic through the proxied URL is secured.
+			</p>
+			<div>
+				<input class="form-input w-8/12" type="url" placeholder="12.345.67.89:25469" oninput="proxy(this)" />
+			</div>
+			<div>
+				<input id="output"
+					class="w-8/12 p-1 px-2 bg-gray-900 select-all font-mono rounded-lg text-gray-400 text-center"
+					value="Input a valid IP address above" onclick="this.select();"></input>
+			</div>
+		</div>
+	</div>
+	<div class="my-12 text-gray-400 text-center text-sm">
+		<a href="https://discordtickets.app/terms" class="underline mx-2">Terms</a>
+		<a href="https://discordtickets.app/privacy" class="underline mx-2">Privacy</a>
+		<br />
+		<br />
+		For use with Discord Tickets bots only. <br />
+		The origin IP is <span class="font-bold">not</span> hidden.
+	</div>
+</body>
+
+<script>
+	function a2hex(str) {
+			var arr = [];
+			for (var i = 0, l = str.length; i < l; i++) {
+				var hex = Number(str.charCodeAt(i)).toString(16);
+				arr.push(hex);
+			}
+			return arr.join('');
+		}
+	function proxy(input) {
+		const re = /^(\b25[0-5]|\b2[0-4][0-9]|\b[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}(:((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4})))?$/;
+		const out = document.getElementById('output');
+		let val = input.value;
+		if (!re.test(val)) return out.value = 'Input a valid IP address above';
+		val = a2hex(val).replace(/\=/g, '');
+		return out.value = `https://${val}.proxy.discordtickets.app`;
+	}
+</script>
+
+</html>

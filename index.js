@@ -9,7 +9,7 @@ fastify.register(require('@fastify/static'), {
 	root: require('path').join(__dirname, 'public'),
 	prefix: '/no-proxy/'
 });
-console.log(require('path').join(__dirname, 'public'));
+
 fastify.all('*', (req, res) => {
 	let host = req.hostname.split('.')[0];
 	if (host === 'proxy') {

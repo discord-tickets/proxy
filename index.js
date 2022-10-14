@@ -30,3 +30,5 @@ fastify.listen({ port }, (err, addr) => {
 	if (err) log.error(err);
 	else log.success(`Listening at`, addr);
 });
+
+process.on('uncaughtException', log.error);

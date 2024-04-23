@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.form-input {
+		@apply rounded-md shadow-sm bg-gray-700 disabled:bg-gray-700/50 border-2 border-transparent focus:border-blurple ring-0 font-normal disabled:cursor-not-allowed placeholder:text-slate-400 disabled:text-slate-200/50;
+	}
+}
